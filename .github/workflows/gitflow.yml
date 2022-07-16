@@ -1,0 +1,34 @@
+# This is a basic workflow to help you get started with Actions
+
+name: GITflow
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: main
+      - uses: ayr-ton/git-deploy-action@v1.1
+        with:
+          # The SSH private key for SSH connection to the target repository.
+          # We strongly recommend saving this value as a GitHub Secret and using deploy
+          # keys within the target repository
+          ssh_private_key: ${{ secrets.SERVER_SSH_KEY }}
+          # The SSH-based URL to the target repository
+          target_repo_url: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
+          # The branch to push to the target repository, mandatory
+          target_branch: main
