@@ -29,6 +29,6 @@ jobs:
           # keys within the target repository
           ssh_private_key: ${{ secrets.SERVER_SSH_KEY }}
           # The SSH-based URL to the target repository
-          target_repo_url: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
+          target_repo_url: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST:555 }}:${{ secrets.REMOTE_TARGET }}
           # The branch to push to the target repository, mandatory
           target_branch: main
