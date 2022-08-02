@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     //timer
-    const deadLine = '2023-01-01';
+    const deadLine = '2024-01-01';
 
     function getTimeRemaining(endtime) {
         let days, hours, minutes, seconds;
