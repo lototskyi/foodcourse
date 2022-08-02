@@ -42,3 +42,4 @@ jobs:
           # # ...or:
           # CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           # CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+          PURGE_URLS: '["https://${{ secrets.CLOUDFLARE_ZONE }}/css/style.css", "https://${{ secrets.CLOUDFLARE_ZONE }}/js/script.js"]'
