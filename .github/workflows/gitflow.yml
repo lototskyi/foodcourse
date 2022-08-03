@@ -33,7 +33,7 @@ jobs:
           # The branch to push to the target repository, mandatory
           target_branch: main
       - name: Clear Cloudflare cache
-        uses: Cyb3r-Jak3/action-cloudflare-cache@Latest
+        uses: Cyb3r-Jak3/action-cloudflare-cache@v1.1.0
         with:
           # Zone is required by both methods
           zone: ${{ secrets.CLOUDFLARE_ZONE }}
