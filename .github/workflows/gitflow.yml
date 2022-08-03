@@ -32,14 +32,15 @@ jobs:
           target_repo_url: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
           # The branch to push to the target repository, mandatory
           target_branch: main
-      - name: Purge cache
-        uses: jakejarvis/cloudflare-purge-action@master
-        env:
-          # Zone is required by both authentication methods
-          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+      - name: Clear Cloudflare cache
+        uses: Cyb3r-Jak3/action-cloudflare-cache@<Latest Release>
+        with:
+          # Zone is required by both methods
+          zone: ${{ secrets.CLOUDFLARE_ZONE }}
 
-          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-          # # ...or:
-          # CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          # CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
-          PURGE_URLS: '["https://food.${{ secrets.REMOTE_HOST }}/css/style.css", "https://food.${{ secrets.REMOTE_HOST }}/js/script.js"]'
+          # Using API Token
+          api_token: ${{ secrets.CLOUDFLARE_TOKEN }}
+
+          # Using Global Token
+          # email: ${{ secrets.CLOUDFLARE_EMAIL }}
+          # global_token: ${{ secrets.CLOUDFLARE_KEY }}
