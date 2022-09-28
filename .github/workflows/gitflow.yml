@@ -13,25 +13,21 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: main
-      - uses: ayr-ton/git-deploy-action@v1.1
-        with:
-          # The SSH private key for SSH connection to the target repository.
-          # We strongly recommend saving this value as a GitHub Secret and using deploy
-          # keys within the target repository
-          ssh_private_key: ${{ secrets.SERVER_SSH_KEY }}
-          # The SSH-based URL to the target repository
-          target_repo_url: ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
-          # The branch to push to the target repository, mandatory
-          target_branch: main
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-avz --delete"
+          SOURCE: "src/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/sass/,/node_modules/,/food-docker/,/.github/"
       - name: Clear Cloudflare cache
         uses: Cyb3r-Jak3/action-cloudflare-cache@v1.1.0
         with:
@@ -40,7 +36,3 @@ jobs:
 
           # Using API Token
           api_token: ${{ secrets.CLOUDFLARE_TOKEN }}
-
-          # Using Global Token
-          # email: ${{ secrets.CLOUDFLARE_EMAIL }}
-          # global_token: ${{ secrets.CLOUDFLARE_KEY }}
