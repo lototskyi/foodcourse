@@ -296,9 +296,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     const host = location.host;
-    const protocol = location.protocol;
 
-    fetch(`${protocol}//${host}:3000/menu`)
+    if (host != 'localhost') {
+        host = '95.46.0.132';
+    }
+
+    fetch(`http://${host}:3000/menu`)
         .then(data => data.json())
         .then(res => console.log(res));
 });
