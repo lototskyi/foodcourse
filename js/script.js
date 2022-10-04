@@ -296,12 +296,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     let host = location.host;
+    const protocol = location.protocol;
 
     if (host != 'localhost') {
-        host = '95.46.0.132';
+        host = 'json.homeapp.pp.ua';
     }
 
-    fetch(`http://${host}:3000/menu`)
+    fetch(`${protocol}//${host}:3000/menu`)
         .then(data => data.json())
         .then(res => console.log(res));
 });
