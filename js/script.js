@@ -295,7 +295,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
-    const host = location.host;
+    let host = location.host;
 
     if (host != 'localhost') {
         host = '95.46.0.132';
