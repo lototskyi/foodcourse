@@ -295,14 +295,14 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
-    let host = location.host;
+    let host = location.host + ':3000';
     const protocol = location.protocol;
 
-    if (host != 'localhost') {
+    if (host != 'localhost:3000') {
         host = 'json.homeapp.pp.ua';
     }
 
-    fetch(`${protocol}//${host}:3000/menu`)
+    fetch(`${protocol}//${host}/menu`)
         .then(data => data.json())
         .then(res => console.log(res));
 });
