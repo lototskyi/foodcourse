@@ -27,7 +27,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: "/sass/,/node_modules/,/food-docker/,/.github/,/.git/,/.gitignore,/db.json,/js/modules/,/services/,/script.js,/webpack.config.js"
+          EXCLUDE: "/sass/,/node_modules/,/food-docker/,/.github/,/.git/,/.gitignore,/db.json,/js/modules/,/js/services/,/js/script.js,/webpack.config.js"
       - name: Clear Cloudflare cache
         uses: Cyb3r-Jak3/action-cloudflare-cache@v1.1.0
         with:
