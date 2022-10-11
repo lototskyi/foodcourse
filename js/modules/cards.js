@@ -1,12 +1,6 @@
+import {getResource, getConnectionData} from '../services/services';
+
 function cards() {
-
-    let host = location.host + ':3000';
-    const protocol = location.protocol;
-
-    if (host != 'localhost:3000') {
-        host = 'json.homeapp.pp.ua';
-    }
-
     class MenuCard {
         constructor(src, alt, title, descr, price, parentSelector, ...classes) {
             this.src = src;
@@ -48,16 +42,6 @@ function cards() {
         }
     }
 
-    const getResource = async (url) => {
-        const res = await fetch(url);
-
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
-
-        return await res.json();
-    };
-
     // getResource(`${protocol}//${host}/menu`)
     //     .then(data => {
     //         data.forEach(({img, altimg, title, descr, price}) => {
@@ -65,6 +49,8 @@ function cards() {
     //         });
     //     });
   
+    const {host, protocol} = getConnectionData();
+
     axios.get(`${protocol}//${host}/menu`)
     .then(data => {
         data.data.forEach(({img, altimg, title, descr, price}) => {
@@ -74,4 +60,5 @@ function cards() {
 
 }
 
-module.exports = cards;
+export default cards;
+export {getConnectionData};
