@@ -42,21 +42,21 @@ function cards() {
         }
     }
 
-    // getResource(`${protocol}//${host}/menu`)
-    //     .then(data => {
-    //         data.forEach(({img, altimg, title, descr, price}) => {
-    //             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-    //         });
-    //     });
-  
     const {host, protocol} = getConnectionData();
 
-    axios.get(`${protocol}//${host}/menu`)
-    .then(data => {
-        data.data.forEach(({img, altimg, title, descr, price}) => {
-            new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+    getResource(`${protocol}//${host}/menu`)
+        .then(data => {
+            data.forEach(({img, altimg, title, descr, price}) => {
+                new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+            });
         });
-    });
+  
+    // axios.get(`${protocol}//${host}/menu`)
+    // .then(data => {
+    //     data.data.forEach(({img, altimg, title, descr, price}) => {
+    //         new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+    //     });
+    // });
 
 }
 
